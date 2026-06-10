@@ -305,8 +305,11 @@ function JsonViewer({ data, title }) {
 // ---- Pages ----
 
 function DashboardPage({ d, loading, error, onAnalyze }) {
-  const surge = d?.patient_surge_summary ?? d?.surge_summary;
+  const surge = d?.patient_surge_summary ?? d?.surge_summary ?? {
+    total: d?.summary?.projected_patients,
+  };
   const severity = d?.incident?.severity ?? d?.severity ?? "critical";
+  const dataSources = d?.data_sources ?? [];
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }}>
@@ -328,7 +331,7 @@ function DashboardPage({ d, loading, error, onAnalyze }) {
               <div>
                 <div style={{ fontSize: 11, color: "#4a5870", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>Active Incident</div>
                 <div style={{ fontSize: 18, fontWeight: 700, color: "#f1f5f9" }}>{d.incident?.name ?? d.name ?? "Marin County Wildfire"}</div>
-                <div style={{ fontSize: 13, color: "#6b7fa3", marginTop: 4 }}>{d.incident?.type ?? "Wildfire"} · {d.incident?.affected_area ?? d.affected_area ?? "Marin County, CA"}</div>
+                <div style={{ fontSize: 13, color: "#6b7fa3", marginTop: 4 }}>{d.incident?.type ?? "Wildfire"} · {d.incident?.location_name ?? d.incident?.affected_area ?? d.affected_area ?? "Marin County, CA"}</div>
               </div>
               <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                 <Badge label={severity} color={SEVERITY_COLOR[severity] ?? "#E24B4A"} />
@@ -363,15 +366,21 @@ function DashboardPage({ d, loading, error, onAnalyze }) {
             </div>
           )}
 
-          {d.data_source_health && (
+          {(d.data_source_health || dataSources.length > 0) && (
             <div style={{ background: "#0f1826", border: "1px solid #1e2d47", borderRadius: 10, padding: "18px 20px" }}>
               <SectionHeader icon="🔗" title="Data Sources" />
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                {Object.entries(d.data_source_health).map(([k, v]) => (
-                  <span key={k} style={{ fontSize: 11, background: "#131929", border: "1px solid #1e2d47", borderRadius: 6, padding: "4px 10px", color: v === "healthy" || v === "connected" ? "#1D9E75" : "#EF9F27" }}>
-                    {k}: {v}
-                  </span>
-                ))}
+                {d.data_source_health
+                  ? Object.entries(d.data_source_health).map(([k, v]) => (
+                    <span key={k} style={{ fontSize: 11, background: "#131929", border: "1px solid #1e2d47", borderRadius: 6, padding: "4px 10px", color: v === "healthy" || v === "connected" ? "#1D9E75" : "#EF9F27" }}>
+                      {k}: {v}
+                    </span>
+                  ))
+                  : dataSources.map((source) => (
+                    <span key={source.connector_id ?? source.source_name} style={{ fontSize: 11, background: "#131929", border: "1px solid #1e2d47", borderRadius: 6, padding: "4px 10px", color: source.setup_state === "connected" || source.used_by_agent ? "#1D9E75" : "#EF9F27" }}>
+                      {source.service ?? source.source_name}: {source.sync_state ?? source.status}
+                    </span>
+                  ))}
               </div>
             </div>
           )}
@@ -383,6 +392,7 @@ function DashboardPage({ d, loading, error, onAnalyze }) {
 }
 
 function AnalysisPage({ d, loading, error, onNext }) {
+  const surge = d?.patient_surge ?? d?.surge_breakdown ?? {};
   const SURGE = [
     { label: "Burns", value: 35, color: "#E24B4A" },
     { label: "Smoke Inhalation", value: 80, color: "#EF9F27" },
@@ -404,15 +414,15 @@ function AnalysisPage({ d, loading, error, onNext }) {
         <>
           <div style={{ background: "#0f1826", border: "1px solid #1e2d47", borderRadius: 10, padding: "18px 20px", marginBottom: 20 }}>
             <SectionHeader icon="🤖" title="Patient Surge Forecast" meta="Model: Gemini Flash" />
-            <StatCard label="Total Projected Patients" value={d?.total_surge ?? 180} color="#F59E0B" sub="Next 4 hours" />
+            <StatCard label="Total Projected Patients" value={surge.total ?? d?.total_surge ?? 180} color="#F59E0B" sub="Next 4 hours" />
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(110px, 1fr))", gap: 10, marginTop: 12 }}>
-              {SURGE.map(s => <StatCard key={s.label} label={s.label} value={d?.surge_breakdown?.[s.label.toLowerCase().replace(" ", "_")] ?? s.value} color={s.color} />)}
+              {SURGE.map(s => <StatCard key={s.label} label={s.label} value={surge[s.label.toLowerCase().replace(" ", "_")] ?? s.value} color={s.color} />)}
             </div>
           </div>
-          {(d?.recommendation ?? d?.agent_recommendation) && (
+          {(d?.recommendation ?? d?.agent_recommendation ?? d?.agent_summary) && (
             <div style={{ background: "#0a1f14", border: "1px solid #1D9E7544", borderRadius: 10, padding: "18px 20px", marginBottom: 20 }}>
               <SectionHeader icon="💡" title="Agent Recommendation" />
-              <p style={{ fontSize: 13, color: "#94a3b8", lineHeight: 1.7 }}>{d.recommendation ?? d.agent_recommendation}</p>
+              <p style={{ fontSize: 13, color: "#94a3b8", lineHeight: 1.7 }}>{d.recommendation ?? d.agent_recommendation ?? d.agent_summary}</p>
             </div>
           )}
           {d && <JsonViewer data={d} title="Full analysis payload" />}
@@ -495,7 +505,8 @@ function SuppliersPage({ d, loading, error, onNext }) {
       </div>
       <LoadState loading={loading} error={error} />
       {d && d.map((result, ri) => {
-        const suppliers = result?.data?.suppliers ?? result?.data ?? [];
+        const payload = result?.data ?? {};
+        const suppliers = payload.candidates ?? payload.suppliers ?? (Array.isArray(payload) ? payload : []);
         return (
           <div key={ri} style={{ background: "#0f1826", border: "1px solid #1e2d47", borderRadius: 10, padding: "18px 20px", marginBottom: 16 }}>
             <SectionHeader icon="🏭" title={resources[ri]} meta={`${suppliers.length} suppliers found`} />
@@ -505,9 +516,9 @@ function SuppliersPage({ d, loading, error, onNext }) {
                 {suppliers.slice(0, 4).map((s, i) => (
                   <tr key={i}>
                     <td style={{ color: "#e2e8f0", fontWeight: 500 }}>{s.name ?? s.supplier_name}</td>
-                    <td style={{ fontFamily: "JetBrains Mono, monospace" }}>{s.available_quantity ?? s.quantity ?? "—"}</td>
-                    <td style={{ fontFamily: "JetBrains Mono, monospace", color: "#22D3EE" }}>{s.eta_minutes ?? s.eta}m</td>
-                    <td><Badge label={s.route_risk ?? "low"} color={s.route_risk === "high" ? "#E24B4A" : s.route_risk === "medium" ? "#EF9F27" : "#1D9E75"} /></td>
+                    <td style={{ fontFamily: "JetBrains Mono, monospace" }}>{s.available_quantity ?? s.available ?? s.quantity ?? "—"}</td>
+                    <td style={{ fontFamily: "JetBrains Mono, monospace", color: "#22D3EE" }}>{s.eta_minutes ?? s.eta_min ?? s.eta}m</td>
+                    <td><Badge label={s.route_risk ?? "low"} color={(s.route_risk ?? "").toLowerCase() === "high" ? "#E24B4A" : (s.route_risk ?? "").toLowerCase() === "medium" ? "#EF9F27" : "#1D9E75"} /></td>
                     <td style={{ fontSize: 11, color: "#6b7fa3" }}>{s.contract_status ?? "active"}</td>
                     <td style={{ fontFamily: "JetBrains Mono, monospace", color: "#F59E0B", fontWeight: 600 }}>{typeof s.score === "number" ? s.score.toFixed(1) : s.score ?? "—"}</td>
                     <td>{(s.recommendation === "Best" || i === 0) && <Badge label="BEST" color="#1D9E75" />}{s.recommendation === "Backup" && <Badge label="BACKUP" color="#378ADD" />}</td>
@@ -661,7 +672,7 @@ function SendPage({ d, loading, error, onNext }) {
 }
 
 function BriefingPage({ d, loading, error, onNext }) {
-  const text = d?.briefing ?? d?.content ?? d?.text ?? "";
+  const text = d?.body ?? d?.briefing ?? d?.content ?? d?.text ?? "";
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }}>
@@ -680,6 +691,7 @@ function BriefingPage({ d, loading, error, onNext }) {
             {d.data_used && <Badge label={`Data: ${Array.isArray(d.data_used) ? d.data_used.join(", ") : d.data_used}`} color="#4a5870" />}
           </div>
           <div style={{ background: "#0f1826", border: "1px solid #1e2d47", borderRadius: 10, padding: "24px", marginBottom: 20, lineHeight: 1.8, fontSize: 13, color: "#94a3b8", whiteSpace: "pre-wrap" }}>
+            {d.title && <div style={{ fontSize: 16, fontWeight: 700, color: "#f1f5f9", marginBottom: 12 }}>{d.title}</div>}
             {text || <span style={{ color: "#4a5870" }}>No briefing text returned. Check raw payload below.</span>}
           </div>
           {d.approval_note && (
