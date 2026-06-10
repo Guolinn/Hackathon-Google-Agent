@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const API = import.meta.env.VITE_API_BASE_URL ?? (import.meta.env.DEV ? "" : "https://crisisflow-backend-556676992179.us-central1.run.app");
+const API = import.meta.env.VITE_API_BASE_URL ?? "";
 const INCIDENT_ID = "INC-2026-0529-MARIN-014";
 const HOSP_ID = "HOSP-SFGH";
 
