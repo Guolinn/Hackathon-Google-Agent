@@ -1,0 +1,12 @@
+[
+  {
+    "incident_id": "INC-2026-0529-MARIN-014",
+    "wind_speed_mph": 24,
+    "wind_direction": "South-East",
+    "temperature_f": 82,
+    "humidity_percent": 21,
+    "air_quality_index": 168,
+    "smoke_direction": "toward_san_francisco",
+    "updated_at": "2026-05-29T17:18:00Z"
+  }
+]

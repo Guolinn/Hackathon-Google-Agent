@@ -1,0 +1,32 @@
+[
+  {
+    "contact_id": "CONTACT-OAK-MED-001",
+    "organization_id": "SUP-OAK-MED",
+    "name": "Emergency Ops Desk",
+    "role": "Dispatch Manager",
+    "email": "ops@medsupply-oakland.example",
+    "phone": "+1-555-0101",
+    "preferred_channel": "api_email_sms",
+    "available_24_7": true
+  },
+  {
+    "contact_id": "CONTACT-NORCAL-OXY-001",
+    "organization_id": "SUP-NORCAL-OXYGEN",
+    "name": "Night Operations",
+    "role": "Oxygen Dispatch Lead",
+    "email": "dispatch@norcaloxygen.example",
+    "phone": "+1-555-0102",
+    "preferred_channel": "email_sms",
+    "available_24_7": true
+  },
+  {
+    "contact_id": "CONTACT-BAYMED-001",
+    "organization_id": "TRANS-BAYMED",
+    "name": "BayMed Dispatch",
+    "role": "Logistics Coordinator",
+    "email": "dispatch@baymedlogistics.example",
+    "phone": "+1-555-0103",
+    "preferred_channel": "portal_sms",
+    "available_24_7": true
+  }
+]

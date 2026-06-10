@@ -1,0 +1,80 @@
+[
+  {
+    "route_id": "ROUTE-OAK-SFGH-001",
+    "origin_id": "SUP-OAK-MED",
+    "origin": "MedSupply Oakland",
+    "destination_id": "HOSP-SFGH",
+    "destination": "SF General",
+    "route_name": "I-580 -> Bay Bridge -> Mission St",
+    "normal_eta_min": 32,
+    "current_eta_min": 42,
+    "congestion_level": "medium",
+    "route_risk": "Medium",
+    "blocked": false
+  },
+  {
+    "route_id": "ROUTE-UCSF-SFGH-001",
+    "origin_id": "SUP-UCSF-STORAGE",
+    "origin": "UCSF Storage",
+    "destination_id": "HOSP-SFGH",
+    "destination": "SF General",
+    "route_name": "Local medical courier via 7th Ave -> US-101 -> Potrero Ave",
+    "normal_eta_min": 19,
+    "current_eta_min": 28,
+    "congestion_level": "low",
+    "route_risk": "Low",
+    "blocked": false
+  },
+  {
+    "route_id": "ROUTE-NORCAL-SFGH-001",
+    "origin_id": "SUP-NORCAL-OXYGEN",
+    "origin": "NorCal Oxygen",
+    "destination_id": "HOSP-SFGH",
+    "destination": "SF General",
+    "route_name": "I-280 northbound alternative",
+    "normal_eta_min": 72,
+    "current_eta_min": 91,
+    "congestion_level": "low",
+    "route_risk": "Low",
+    "blocked": false
+  },
+  {
+    "route_id": "ROUTE-SAC-SFGH-001",
+    "origin_id": "SUP-SAC-MEDDEPOT",
+    "origin": "Sacramento MedDepot",
+    "destination_id": "HOSP-SFGH",
+    "destination": "SF General",
+    "route_name": "I-80 -> Bay Bridge -> Mission St",
+    "normal_eta_min": 112,
+    "current_eta_min": 138,
+    "congestion_level": "medium",
+    "route_risk": "Medium",
+    "blocked": false
+  },
+  {
+    "route_id": "ROUTE-SJ-SFGH-001",
+    "origin_id": "SUP-SJ-WAREHOUSE",
+    "origin": "San Jose Warehouse",
+    "destination_id": "HOSP-SFGH",
+    "destination": "SF General",
+    "route_name": "I-280 northbound",
+    "normal_eta_min": 82,
+    "current_eta_min": 104,
+    "congestion_level": "low",
+    "route_risk": "Low",
+    "blocked": false
+  },
+  {
+    "route_id": "ROUTE-BAYMED-OAK-001",
+    "origin_id": "TRANS-BAYMED",
+    "origin": "BayMed Logistics",
+    "destination_id": "SUP-OAK-MED",
+    "destination": "MedSupply Oakland",
+    "route_name": "Bay Bridge -> I-580",
+    "normal_eta_min": 23,
+    "current_eta_min": 30,
+    "congestion_level": "medium",
+    "route_risk": "Medium",
+    "blocked": false
+  }
+]

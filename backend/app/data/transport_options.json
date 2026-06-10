@@ -1,0 +1,12 @@
+[
+  {
+    "transport_id": "TRANS-BAYMED-001",
+    "provider_id": "TRANS-BAYMED",
+    "provider_name": "BayMed Logistics",
+    "vehicle_type": "medical_van",
+    "vehicles_available": 6,
+    "cold_chain": false,
+    "pickup_eta_min": 30,
+    "status": "active"
+  }
+]

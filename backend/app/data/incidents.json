@@ -1,0 +1,26 @@
+[
+  {
+    "incident_id": "INC-2026-0529-MARIN-014",
+    "type": "wildfire",
+    "location_name": "Marin County",
+    "latitude": 37.9577,
+    "longitude": -122.5311,
+    "severity": "Level 4",
+    "detected_at": "2026-05-29T17:12:00Z",
+    "population_at_risk": 42000,
+    "projected_patients": 180,
+    "peak_arrival_hours": 2.5,
+    "status": "active",
+    "target_hospital_id": "HOSP-SFGH",
+    "patient_surge": {
+      "total": 180,
+      "burns": 35,
+      "smoke_inhalation": 80,
+      "trauma": 28,
+      "icu_risk": 12,
+      "observation": 25,
+      "oxygen_support_cases": 30,
+      "peak_arrival_hours": 2.5
+    }
+  }
+]

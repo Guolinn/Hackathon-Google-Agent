@@ -1,0 +1,42 @@
+[
+  {
+    "source_name": "Hospital Capacity",
+    "connector_id": "fivetran_hospital_capacity",
+    "last_sync_minutes": 4,
+    "status": "Fresh",
+    "records_loaded": 4,
+    "used_by_agent": true
+  },
+  {
+    "source_name": "Hospital Inventory",
+    "connector_id": "fivetran_hospital_inventory",
+    "last_sync_minutes": 5,
+    "status": "Fresh",
+    "records_loaded": 5,
+    "used_by_agent": true
+  },
+  {
+    "source_name": "Supplier Inventory",
+    "connector_id": "fivetran_supplier_inventory",
+    "last_sync_minutes": 3,
+    "status": "Fresh",
+    "records_loaded": 6,
+    "used_by_agent": true
+  },
+  {
+    "source_name": "Traffic ETA",
+    "connector_id": "fivetran_traffic_routes",
+    "last_sync_minutes": 2,
+    "status": "Fresh",
+    "records_loaded": 6,
+    "used_by_agent": true
+  },
+  {
+    "source_name": "Emergency Contacts",
+    "connector_id": "fivetran_emergency_contacts",
+    "last_sync_minutes": 18,
+    "status": "Warning",
+    "records_loaded": 3,
+    "used_by_agent": false
+  }
+]

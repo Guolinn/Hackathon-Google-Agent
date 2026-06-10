@@ -1,0 +1,23 @@
+[
+  {
+    "hospital_id": "HOSP-SFGH",
+    "role": "ER nurse",
+    "staff_available": 20,
+    "staff_needed_projected": 28,
+    "shift_end": "2026-05-29T23:00:00Z"
+  },
+  {
+    "hospital_id": "HOSP-SFGH",
+    "role": "burn specialist",
+    "staff_available": 4,
+    "staff_needed_projected": 6,
+    "shift_end": "2026-05-29T23:00:00Z"
+  },
+  {
+    "hospital_id": "HOSP-UCSF",
+    "role": "ER nurse",
+    "staff_available": 24,
+    "staff_needed_projected": 18,
+    "shift_end": "2026-05-29T23:00:00Z"
+  }
+]

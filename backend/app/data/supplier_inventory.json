@@ -1,0 +1,62 @@
+[
+  {
+    "supplier_id": "SUP-OAK-MED",
+    "item_id": "ITEM-BURN-KIT",
+    "item_name": "Burn kits",
+    "category": "burn_care",
+    "quantity_available": 300,
+    "earliest_pickup_min": 20,
+    "unit": "kit",
+    "updated_at": "2026-05-29T17:24:00Z"
+  },
+  {
+    "supplier_id": "SUP-UCSF-STORAGE",
+    "item_id": "ITEM-ALBUTEROL",
+    "item_name": "Albuterol doses",
+    "category": "respiratory",
+    "quantity_available": 150,
+    "earliest_pickup_min": 12,
+    "unit": "dose",
+    "updated_at": "2026-05-29T17:24:00Z"
+  },
+  {
+    "supplier_id": "SUP-UCSF-STORAGE",
+    "item_id": "ITEM-BURN-KIT",
+    "item_name": "Burn kits",
+    "category": "burn_care",
+    "quantity_available": 90,
+    "earliest_pickup_min": 12,
+    "unit": "kit",
+    "updated_at": "2026-05-29T17:24:00Z"
+  },
+  {
+    "supplier_id": "SUP-NORCAL-OXYGEN",
+    "item_id": "ITEM-OXYGEN-CYL",
+    "item_name": "Oxygen cylinders",
+    "category": "respiratory",
+    "quantity_available": 80,
+    "earliest_pickup_min": 30,
+    "unit": "cylinder",
+    "updated_at": "2026-05-29T17:24:00Z"
+  },
+  {
+    "supplier_id": "SUP-SAC-MEDDEPOT",
+    "item_id": "ITEM-BURN-KIT",
+    "item_name": "Burn kits",
+    "category": "burn_care",
+    "quantity_available": 900,
+    "earliest_pickup_min": 45,
+    "unit": "kit",
+    "updated_at": "2026-05-29T17:24:00Z"
+  },
+  {
+    "supplier_id": "SUP-SJ-WAREHOUSE",
+    "item_id": "ITEM-OXYGEN-CYL",
+    "item_name": "Oxygen cylinders",
+    "category": "respiratory",
+    "quantity_available": 120,
+    "earliest_pickup_min": 40,
+    "unit": "cylinder",
+    "updated_at": "2026-05-29T17:24:00Z"
+  }
+]

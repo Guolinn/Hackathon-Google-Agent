@@ -1,0 +1,42 @@
+[
+  {
+    "hospital_id": "HOSP-SFGH",
+    "name": "SF General",
+    "city": "San Francisco",
+    "latitude": 37.7557,
+    "longitude": -122.4044,
+    "trauma_level": "Level 1",
+    "burn_unit": true,
+    "emergency_contact": "sfgh-coordination@example.org"
+  },
+  {
+    "hospital_id": "HOSP-UCSF",
+    "name": "UCSF Medical Center",
+    "city": "San Francisco",
+    "latitude": 37.7631,
+    "longitude": -122.4586,
+    "trauma_level": "Level 2",
+    "burn_unit": false,
+    "emergency_contact": "ucsf-coordination@example.org"
+  },
+  {
+    "hospital_id": "HOSP-CPMC",
+    "name": "CPMC Van Ness",
+    "city": "San Francisco",
+    "latitude": 37.7862,
+    "longitude": -122.4213,
+    "trauma_level": "Level 2",
+    "burn_unit": false,
+    "emergency_contact": "cpmc-coordination@example.org"
+  },
+  {
+    "hospital_id": "HOSP-OAKMED",
+    "name": "Oakland Medical Center",
+    "city": "Oakland",
+    "latitude": 37.8044,
+    "longitude": -122.2712,
+    "trauma_level": "Level 2",
+    "burn_unit": true,
+    "emergency_contact": "oakmed-coordination@example.org"
+  }
+]
